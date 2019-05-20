@@ -1,6 +1,7 @@
 package Simulator;
 
 import MathUtils.VectorField;
+import Physics.BField;
 import Physics.EField;
 import Physics.PointCharge;
 import Solver.Solver;
@@ -24,10 +25,11 @@ public class StaticEFieldSimulator {
 
     public void simulate(int rounds) {
         for (int i = 0; i < rounds; i++) {
-
             // should not mutate charges
-            charges = solver.stepForward(eField, VectorField.ZERO_FIELD, charges, timeStep);
+            solver.stepForward(eField, BField.ZERO_FIELD, charges, timeStep);
         }
+
+        System.out.println("Computation completed.");
     }
 
     // use a charge distribution to find out static electric field

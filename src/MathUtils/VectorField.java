@@ -1,18 +1,13 @@
 package MathUtils;
 
+import Physics.EField;
+
 public class VectorField {
-
-    Function xFunc;     // maps a vector to a number in x
-    Function yFunc;
-    Function zFunc;
-
-
-
-    public static final VectorField ZERO_FIELD = new VectorField(
-            (Vector xv) -> 0,
-            (Vector yv) -> 0,
-            (Vector zv) -> 0
-    );
+    protected Function xFunc;
+    protected Function yFunc;
+    protected Function zFunc;
+    public static final VectorField ZERO_FIELD = new VectorField(new ZeroFunction(),
+            new ZeroFunction(), new ZeroFunction());
 
     public VectorField(Function x, Function y, Function z) {
         xFunc = x;
@@ -20,15 +15,17 @@ public class VectorField {
         zFunc = z;
     }
 
-    public VectorField() {
-
-    }
-
     // Return the vector at position v
-    Vector vectorAt(Vector v) {
+    public Vector vectorAt(Vector v) {
         return new Vector(xFunc.apply(v), yFunc.apply(v), zFunc.apply(v));
     }
 
+    public VectorField add(VectorField vf) {
+        AddedFunction addedXFunc = new AddedFunction(this.xFunc, vf.xFunc);
+        AddedFunction addedYFunc = new AddedFunction(this.yFunc, vf.yFunc);
+        AddedFunction addedZFunc = new AddedFunction(this.zFunc, vf.zFunc);
+        return new VectorField(addedXFunc, addedYFunc, addedZFunc);
+    }
 
     // a function that maps position vectors to vectors
     VectorField curl() {
@@ -38,8 +35,6 @@ public class VectorField {
     double div() {
         return 0;
     }
-
-
 
 
 }

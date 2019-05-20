@@ -6,25 +6,25 @@ public class Vector {
     protected double y;
     protected double z;
 
-    Vector(double x, double y, double z) {
+    public Vector(double x, double y, double z) {
         this.x = x;
         this.y = y;
         this.z = z;
     }
 
-    Vector negate() {
+    public Vector negate() {
         return new Vector(-x, -y, -z);
     }
 
-    double length() {
+    public double length() {
         return Math.sqrt(dot(this));
     }
 
-    Vector add(Vector v) {
+    public Vector add(Vector v) {
         return new Vector(x + v.x, y + v.y, z + v.z);
     }
 
-    Vector sub(Vector v) {
+    public Vector sub(Vector v) {
         return add(v.negate());
     }
 
