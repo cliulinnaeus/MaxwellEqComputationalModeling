@@ -1,6 +1,8 @@
 package Simulator;
 
+import MathUtils.Function;
 import MathUtils.VectorField;
+import MathUtils.ZeroFunction;
 import Physics.BField;
 import Physics.EField;
 import Physics.PointCharge;
@@ -22,10 +24,11 @@ public class StaticEFieldSimulator {
         timeStep = dt;
     }
 
-
     public void simulate(int rounds) {
         for (int i = 0; i < rounds; i++) {
             // should not mutate charges
+
+
             solver.stepForward(eField, BField.ZERO_FIELD, charges, timeStep);
         }
 

@@ -13,4 +13,6 @@ public class AddedFunction implements Function {
     public double apply(Vector v) {
         return f1.apply(v) + f2.apply(v);
     }
+
+
 }

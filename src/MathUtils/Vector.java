@@ -16,6 +16,12 @@ public class Vector {
         return new Vector(-x, -y, -z);
     }
 
+    public Vector normalize() {
+        double length = length();
+        return scalarMul(1 / length);
+    }
+
+
     public double length() {
         return Math.sqrt(dot(this));
     }
@@ -24,23 +30,38 @@ public class Vector {
         return new Vector(x + v.x, y + v.y, z + v.z);
     }
 
+    public Vector scalarMul(double c) {
+        return new Vector(x * c, y * c, z * c);
+    }
+
     public Vector sub(Vector v) {
         return add(v.negate());
     }
 
-    double dot(Vector v) {
+    public double dot(Vector v) {
         return x * v.x + y * v.y + z * v.z;
     }
 
-    Vector cross(Vector v) {
+    public Vector cross(Vector v) {
         double resultX = y * v.z - z * v.y;
         double resultY = z * v.x - x * v.z;
         double resultZ = x * v.y - y * v.x;
         return new Vector(resultX, resultY, resultZ);
     }
 
-    boolean isOrthogonalTo(Vector v) {
+    public boolean isOrthogonalTo(Vector v) {
         return dot(v) == 0;
+    }
+
+    public double x() {return x;}
+    public double y() {return y;}
+    public double z() {return z;}
+
+
+    @Override
+    public boolean equals(Object v) {
+        Vector vector = (Vector) v;
+        return x == vector.x && y == vector.y && z == vector.z;
     }
 
 

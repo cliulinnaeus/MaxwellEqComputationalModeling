@@ -1,11 +1,11 @@
 package MathUtils;
 
-import Physics.EField;
-
 public class VectorField {
+
     protected Function xFunc;
     protected Function yFunc;
     protected Function zFunc;
+    protected Function func;
     public static final VectorField ZERO_FIELD = new VectorField(new ZeroFunction(),
             new ZeroFunction(), new ZeroFunction());
 
@@ -13,6 +13,10 @@ public class VectorField {
         xFunc = x;
         yFunc = y;
         zFunc = z;
+    }
+
+    public VectorField(Function f) {
+        func = f;
     }
 
     // Return the vector at position v
@@ -27,6 +31,11 @@ public class VectorField {
         return new VectorField(addedXFunc, addedYFunc, addedZFunc);
     }
 
+
+    /*
+    operators for vector calculus:
+
+     */
     // a function that maps position vectors to vectors
     VectorField curl() {
         return null;
