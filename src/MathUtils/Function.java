@@ -2,5 +2,6 @@ package MathUtils;
 
 public interface Function {
 
-    double apply(Vector v);
+    Vector apply(Vector v);
+
 }

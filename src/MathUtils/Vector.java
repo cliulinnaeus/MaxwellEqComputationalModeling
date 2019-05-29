@@ -5,6 +5,7 @@ public class Vector {
     protected double x;
     protected double y;
     protected double z;
+    public static final Vector ZERO_VECTOR = new Vector(0, 0, 0);
 
     public Vector(double x, double y, double z) {
         this.x = x;

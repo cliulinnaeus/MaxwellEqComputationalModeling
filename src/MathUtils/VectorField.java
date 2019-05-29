@@ -2,18 +2,46 @@ package MathUtils;
 
 public class VectorField {
 
-    protected Function xFunc;
-    protected Function yFunc;
-    protected Function zFunc;
+//    protected Function xFunc;
+//    protected Function yFunc;
+//    protected Function zFunc;
     protected Function func;
-    public static final VectorField ZERO_FIELD = new VectorField(new ZeroFunction(),
-            new ZeroFunction(), new ZeroFunction());
+    public static final VectorField ZERO_FIELD = new VectorField(new ZeroFunction());
 
-    public VectorField(Function x, Function y, Function z) {
-        xFunc = x;
-        yFunc = y;
-        zFunc = z;
+
+    private class AddedFunction implements Function {
+        private Function f1;
+        private Function f2;
+        AddedFunction(Function f1, Function f2) {
+            this.f1 = f1;
+            this.f2 = f2;
+        }
+        @Override
+        // TODO: v is generally not the same for f1 and f2
+        public Vector apply(Vector v) {
+            return f1.apply(v).add(f2.apply(v));
+        }
     }
+
+    private class NegatedFunction implements Function {
+        private Function f;
+        NegatedFunction(Function f) {
+            this.f = f;
+        }
+
+        @Override
+        public Vector apply(Vector v) {
+            return f.apply(v).negate();
+        }
+    }
+
+
+
+//    public VectorField(Function x, Function y, Function z) {
+//        xFunc = x;
+//        yFunc = y;
+//        zFunc = z;
+//    }
 
     public VectorField(Function f) {
         func = f;
@@ -21,16 +49,22 @@ public class VectorField {
 
     // Return the vector at position v
     public Vector vectorAt(Vector v) {
-        return new Vector(xFunc.apply(v), yFunc.apply(v), zFunc.apply(v));
+        return func.apply(v);
     }
 
     public VectorField add(VectorField vf) {
-        AddedFunction addedXFunc = new AddedFunction(this.xFunc, vf.xFunc);
-        AddedFunction addedYFunc = new AddedFunction(this.yFunc, vf.yFunc);
-        AddedFunction addedZFunc = new AddedFunction(this.zFunc, vf.zFunc);
-        return new VectorField(addedXFunc, addedYFunc, addedZFunc);
+        AddedFunction addedXFunc = new AddedFunction(func, vf.func);
+        return new VectorField(addedXFunc);
     }
 
+    public VectorField negate() {
+        NegatedFunction nf = new NegatedFunction(func);
+        return new VectorField(nf);
+    }
+
+    public VectorField sub(VectorField vf) {
+        return add(vf.negate());
+    }
 
     /*
     operators for vector calculus:

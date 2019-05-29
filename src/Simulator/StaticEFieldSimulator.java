@@ -11,25 +11,25 @@ import javafx.scene.effect.Effect;
 
 public class StaticEFieldSimulator {
 
-    private EField eField;
+    private EField externalEField;
     private PointCharge[] charges;
     private double timeStep;
     private Solver solver;
 
 
     public StaticEFieldSimulator(EField e, PointCharge[] pc, Solver s, double dt) {
-        eField = e;
+        externalEField = e;
         charges = pc;
         solver = s;
         timeStep = dt;
     }
 
-    public void simulate(int rounds) {
+    public void stepForward() {
         for (int i = 0; i < rounds; i++) {
             // should not mutate charges
 
 
-            solver.stepForward(eField, BField.ZERO_FIELD, charges, timeStep);
+            solver.stepForward(externalEField, BField.ZERO_FIELD, charges, timeStep);
         }
 
         System.out.println("Computation completed.");

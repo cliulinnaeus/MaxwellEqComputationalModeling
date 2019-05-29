@@ -12,8 +12,9 @@ public class BField extends VectorField {
 
     @Override
     public Vector vectorAt(Vector v) {
-        double mag = func.apply(v);
-        return new Vector(mag * v.x(), mag * v.y(), mag * v.z());
+//        double mag = func.apply(v);
+//        return new Vector(mag * v.x(), mag * v.y(), mag * v.z());
+        return null;
     }
 
 

@@ -16,23 +16,23 @@ public class PointCharge {
 
     private class PointChargeEFunc implements Function {
         @Override
-        public double apply(Vector v) {
+        public Vector apply(Vector v) {
             Vector dV = v.sub(pos);
             double length = dV.length();
             double eMag = Constants.K * q / (length * length * length);
-            return eMag;
+            return new Vector(dV.x() * eMag, dV.y() * eMag, dV.z() * eMag);
         }
     }
 
     private class PointChargeBFunc implements Function {
         @Override
-        public double apply(Vector v) {
+        public Vector apply(Vector v) {
             Vector dV = v.sub(pos);
             /*
             What's the formula for B of point charge?
 
              */
-            return 0;
+            return null;
         }
     }
 

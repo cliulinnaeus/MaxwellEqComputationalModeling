@@ -8,11 +8,19 @@ public class EField extends VectorField {
 
    public EField(Function f) {
        super(f);
-   }
 
-    @Override
-    public Vector vectorAt(Vector v) {
-        double mag = func.apply(v);
-        return new Vector(mag * v.x(), mag * v.y(), mag * v.z());
-    }
+
+
+               /*
+
+
+               x* mag
+               y * mag
+               z * mag
+
+               to do this,
+
+
+                */
+   }
 }
