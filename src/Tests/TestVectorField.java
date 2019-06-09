@@ -12,15 +12,11 @@ public class TestVectorField {
     public void testAdd() {
 
         VectorField allOnes = new VectorField(
-                (Vector v) -> 1,
-                (Vector v) -> 1,
-                (Vector v) -> 1
+                (Vector v) -> new Vector(1, 1, 1)
         );
 
         VectorField allTwos = new VectorField(
-                (Vector v) -> 2,
-                (Vector v) -> 2,
-                (Vector v) -> 2
+                (Vector v) -> new Vector(2, 2, 2)
         );
         VectorField addedField = allOnes.add(allTwos);
 

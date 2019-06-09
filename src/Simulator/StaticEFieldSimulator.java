@@ -1,53 +1,47 @@
 package Simulator;
 
-import MathUtils.Function;
+import MathUtils.Vector;
 import MathUtils.VectorField;
-import MathUtils.ZeroFunction;
-import Physics.BField;
-import Physics.EField;
 import Physics.PointCharge;
-import Solver.Solver;
-import javafx.scene.effect.Effect;
+import Solver.*;
+import com.sun.javafx.scene.paint.GradientUtils;
 
 public class StaticEFieldSimulator {
 
-    private EField externalEField;
+    private VectorField externalEField;
+    private VectorField totalEField;
     private PointCharge[] charges;
     private double timeStep;
     private Solver solver;
 
 
-    public StaticEFieldSimulator(EField e, PointCharge[] pc, Solver s, double dt) {
+    public StaticEFieldSimulator(VectorField e, PointCharge[] pc, Solver s, double dt) {
         externalEField = e;
         charges = pc;
         solver = s;
         timeStep = dt;
     }
 
-    public void stepForward() {
-        for (int i = 0; i < rounds; i++) {
-            // should not mutate charges
-
-
-            solver.stepForward(externalEField, BField.ZERO_FIELD, charges, timeStep);
-        }
-
-        System.out.println("Computation completed.");
-    }
 
     // use a charge distribution to find out static electric field
 
 
-    /*
-    Takes in an electric field and a bunch of free charges
-    compute the motion of the charges
-
-
-
-     */
     public static void main(String[] args) {
+        PointCharge[] pointCharges = new PointCharge[2];
+        PointCharge pc1 = new PointCharge(1, 1,
+                new Vector(0, 0, 0), new Vector(1, 1, 0));
+        PointCharge pc2 = new PointCharge(-1, 1,
+                new Vector(-10, 10, 0), new Vector(-1, -1, 0));
+        pointCharges[0] = pc1;
+        pointCharges[1] = pc2;
 
+        EulerSolver solver = new EulerSolver(VectorField.ZERO_FIELD, VectorField.ZERO_FIELD, pointCharges, 0.01);
 
+        for (int i = 0; i < 10000; i++) {
+            solver.stepForward();
+
+        }
+        System.out.println("Simulation completed");
 
 
     }

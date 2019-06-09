@@ -6,13 +6,13 @@ import MathUtils.Vector;
 import MathUtils.VectorField;
 
 public class PointCharge {
-    double q;
-    Vector pos;
-    Vector velo;
-    EField eField;
-    BField bField;
-    ScalarField ePotential;
-
+    public double q;
+    public Vector pos;
+    public Vector velo;
+    public VectorField eField;
+    public VectorField bField;
+    public ScalarField ePotential;
+    public double mass;
 
     private class PointChargeEFunc implements Function {
         @Override
@@ -37,15 +37,16 @@ public class PointCharge {
     }
 
 
-    public PointCharge(double q, Vector pos, Vector velo) {
+    public PointCharge(double q, double mass, Vector pos, Vector velo) {
         this.q = q;
         this.pos = pos;
         this.velo = velo;
+        this.mass = mass;
 
         PointChargeEFunc eFunc = new PointChargeEFunc();
         PointChargeBFunc bFunc = new PointChargeBFunc();
-        eField = new EField(eFunc);
-        bField = new BField(bFunc);
+        eField = new VectorField(eFunc);
+        bField = new VectorField(bFunc);
 
         /*
         r ^ 3 = (x^2 + y^2 + z^2) ^ 3/2
