@@ -38,9 +38,14 @@ public class StaticEFieldSimulator {
         EulerSolver solver = new EulerSolver(VectorField.ZERO_FIELD, VectorField.ZERO_FIELD, pointCharges, 0.01);
 
         for (int i = 0; i < 10000; i++) {
+
+            System.out.println(pc1.velo.x() + " " + pc1.velo.y() + " " + pc1.velo.z());
+
+
             solver.stepForward();
 
         }
+        System.out.println();
         System.out.println("Simulation completed");
 
 
